@@ -6,11 +6,16 @@ import {
 import { MOCK_BOOKS } from './mocks/books.mock';
 import { Book } from './entities/book.entity';
 import { PaginationQueryParams } from 'src/constants';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class BooksService {
+  constructor(private logger: LoggerService) {}
+
   findAll(queryParams: PaginationQueryParams) {
+    this.logger.log('Finding all books');
     return {
+      loggerId: this.logger.getLoggerId(),
       ...queryParams,
       data: MOCK_BOOKS.getAll,
     };
