@@ -10,9 +10,9 @@ import {
   Query,
 } from '@nestjs/common';
 import { BooksService } from '../services/books.service';
-import { PaginationQueryDto } from 'src/constants';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Controller('books')
 export class BooksController {
