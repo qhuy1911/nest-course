@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BooksController } from './controllers/books.controller';
 import { BooksService } from './services/books.service';
-import { LoggerModule } from 'src/logger/logger.module';
+import { LoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [LoggerModule],

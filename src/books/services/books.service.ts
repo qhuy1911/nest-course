@@ -5,14 +5,14 @@ import {
 } from '@nestjs/common';
 import { MOCK_BOOKS } from '../mocks/books.mock';
 import { Book } from '../entities/book.entity';
-import { PaginationQueryParams } from 'src/constants';
-import { LoggerService } from 'src/logger/services/logger.service';
+import { PaginationQueryParams, PaginationResponse } from 'src/constants';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class BooksService {
   constructor(private readonly logger: LoggerService) {}
 
-  findAll(queryParams: PaginationQueryParams) {
+  findAll(queryParams: PaginationQueryParams): PaginationResponse<Book> {
     this.logger.log('Finding all books');
     return {
       loggerId: this.logger.getLoggerId(),
