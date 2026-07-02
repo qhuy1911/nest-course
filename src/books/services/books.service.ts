@@ -21,10 +21,7 @@ export class BooksService {
   }
 
   findMany(ids: number[]): Book[] {
-    return ids.flatMap((bookId) => {
-      const book = this.findOne(bookId);
-      return book ? [book] : [];
-    });
+    return ids.map((id) => this.findOne(id));
   }
 
   findOne(id: number): Book {
