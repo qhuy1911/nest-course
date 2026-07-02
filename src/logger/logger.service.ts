@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class LoggerService {
-  private readonly id = Math.random();
+  private readonly id = crypto.randomUUID();
 
   getLoggerId() {
     return this.id;
