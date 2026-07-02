@@ -1,14 +1,4 @@
-import { Injectable } from '@nestjs/common';
-
-@Injectable()
-export class LoggerService {
-  private readonly id = crypto.randomUUID();
-
-  getLoggerId() {
-    return this.id;
-  }
-
-  log(message: string) {
-    console.log(`[LOG]: ${message}`);
-  }
+export abstract class LoggerService {
+  abstract log(message: string): void;
+  abstract getLoggerId(): string;
 }
