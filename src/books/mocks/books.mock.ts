@@ -1,4 +1,6 @@
-export const MOCK_BOOKS = [
+import { Book } from '../entities/book.entity';
+
+export const MOCK_BOOKS: Book[] = [
   {
     id: 1,
     title: 'Clean Code',

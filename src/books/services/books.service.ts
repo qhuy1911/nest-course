@@ -27,8 +27,12 @@ export class BooksService {
     });
   }
 
-  findOne(id: number) {
-    return MOCK_BOOKS.find((book) => book.id === id);
+  findOne(id: number): Book {
+    const book = MOCK_BOOKS.find((book) => book.id === id);
+    if (!book) {
+      throw new NotFoundException('Book not found');
+    }
+    return book;
   }
 
   create(body: CreateBookDto) {
