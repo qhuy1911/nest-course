@@ -10,7 +10,7 @@ import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class BooksService {
-  constructor(private logger: LoggerService) {}
+  constructor(private readonly logger: LoggerService) {}
 
   findAll(queryParams: PaginationQueryParams) {
     this.logger.log('Finding all books');

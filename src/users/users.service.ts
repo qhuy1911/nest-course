@@ -3,7 +3,7 @@ import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private logger: LoggerService) {}
+  constructor(private readonly logger: LoggerService) {}
 
   findAll() {
     this.logger.log('Finding all users');
