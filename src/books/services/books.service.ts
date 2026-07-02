@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { MOCK_BOOKS } from '../mocks/books.mock';
-import { Book } from '../entities/book.entity';
+import type { Book } from '../entities/book.entity';
 import { LoggerService } from '../../logger/logger.service';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';

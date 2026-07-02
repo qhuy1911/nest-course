@@ -8,11 +8,13 @@ import {
   Patch,
   Post,
   Query,
+  UseFilters,
 } from '@nestjs/common';
 import { BooksService } from '../services/books.service';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
+import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 
 @Controller('books')
 export class BooksController {
@@ -28,6 +30,7 @@ export class BooksController {
     return this.booksService.findAll(query);
   }
 
+  @UseFilters(HttpExceptionFilter)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.booksService.findOne(id);
