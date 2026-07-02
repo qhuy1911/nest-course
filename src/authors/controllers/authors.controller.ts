@@ -1,18 +1,14 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { AuthorsService } from '../services/authors.service';
-import { PaginationQueryParams } from 'src/constants';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Controller('authors')
 export class AuthorsController {
   constructor(private readonly authorsService: AuthorsService) {}
 
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 5) {
-    const queryParams: PaginationQueryParams = {
-      page,
-      limit,
-    };
-    return this.authorsService.findAll(queryParams);
+  findAll(@Query() query: PaginationQueryDto) {
+    return this.authorsService.findAll(query);
   }
 
   @Get(':id/books')
