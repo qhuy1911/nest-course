@@ -5,10 +5,10 @@ import { NextFunction, Request, Response } from 'express';
 export class LoggerMiddleware implements NestMiddleware {
   private readonly logger = new Logger(LoggerMiddleware.name);
 
-  use(req: Request, res: Response, next: NextFunction) {
+  use(req: Request, _res: Response, next: NextFunction): void {
     this.logger.log(`HTTP Method: ${req.method}`);
     this.logger.log(`URL: ${req.url}`);
-    this.logger.log(`Current timestamp: ${Date.now()}`);
+    this.logger.log(`Current timestamp: ${new Date().toISOString()}`);
     next();
   }
 }

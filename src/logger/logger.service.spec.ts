@@ -11,7 +11,6 @@ describe('LoggerService', () => {
         ConsoleLoggerService,
         { provide: LoggerService, useClass: ConsoleLoggerService },
       ],
-      exports: [LoggerService],
     }).compile();
 
     service = await module.resolve<LoggerService>(LoggerService);

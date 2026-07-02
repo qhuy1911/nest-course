@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthorsService } from './authors.service';
 import { BooksModule } from '../../books/books.module';
 import { LoggerModule } from '../../logger/logger.module';
-import { AuthorsController } from '../controllers/authors.controller';
 
 describe('AuthorsService', () => {
   let service: AuthorsService;
@@ -10,7 +9,6 @@ describe('AuthorsService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [BooksModule, LoggerModule],
-      controllers: [AuthorsController],
       providers: [AuthorsService],
     }).compile();
 

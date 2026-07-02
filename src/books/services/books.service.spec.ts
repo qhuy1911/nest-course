@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BooksService } from './books.service';
 import { LoggerModule } from '../../logger/logger.module';
-import { BooksController } from '../controllers/books.controller';
 import { APP_CONFIG } from '../../providers/app-config.provider';
 
 describe('BooksService', () => {
@@ -10,7 +9,6 @@ describe('BooksService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [LoggerModule],
-      controllers: [BooksController],
       providers: [
         BooksService,
         {
