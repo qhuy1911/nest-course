@@ -3,14 +3,19 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { MOCK_BOOKS } from './mocks/books.mock';
-import { Book } from './entities/book.entity';
-import { PaginationQueryParams } from 'src/constants';
+import { MOCK_BOOKS } from '../mocks/books.mock';
+import { Book } from '../entities/book.entity';
+import { PaginationQueryParams, PaginationResponse } from 'src/constants';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class BooksService {
-  findAll(queryParams: PaginationQueryParams) {
+  constructor(private readonly logger: LoggerService) {}
+
+  findAll(queryParams: PaginationQueryParams): PaginationResponse<Book> {
+    this.logger.log('Finding all books');
     return {
+      loggerId: this.logger.getLoggerId(),
       ...queryParams,
       data: MOCK_BOOKS.getAll,
     };
