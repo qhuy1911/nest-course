@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MOCK_AUTHORS } from '../mocks/authors.mock';
 import { AuthorWithBooks } from '../entities/authors.entity';
-import { BooksService } from 'src/books/services/books.service';
-import { PaginationResponse } from 'src/common/types/pagination-response';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { LoggerService } from 'src/logger/logger.service';
+import { BooksService } from '../../books/services/books.service';
+import { PaginationResponse } from '../../common/types/pagination-response';
+import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
+import { LoggerService } from '../../logger/logger.service';
 
 @Injectable()
 export class AuthorsService {

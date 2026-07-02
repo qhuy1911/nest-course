@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { BooksController } from './controllers/books.controller';
 import { BooksService } from './services/books.service';
 import { LoggerModule } from '../logger/logger.module';
-import { APP_CONFIG } from 'src/providers/app-config.provider';
+import { APP_CONFIG } from '../providers/app-config.provider';
+import { LoggerMiddleware } from '../logger/logger.middleware';
 
 @Module({
   imports: [LoggerModule],
@@ -19,4 +20,11 @@ import { APP_CONFIG } from 'src/providers/app-config.provider';
   ],
   exports: [BooksService],
 })
-export class BooksModule {}
+export class BooksModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(LoggerMiddleware)
+      .exclude('books/config')
+      .forRoutes(BooksController);
+  }
+}
