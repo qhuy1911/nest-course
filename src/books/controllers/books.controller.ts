@@ -8,8 +8,8 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { BooksService } from './books.service';
-import * as booksModel from './entities/book.entity';
+import { BooksService } from '../services/books.service';
+import * as booksModel from '../entities/book.entity';
 import { PaginationQueryParams } from 'src/constants';
 
 @Controller('books')
