@@ -10,20 +10,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { BooksService } from '../services/books.service';
-import * as booksModel from '../entities/book.entity';
-import { PaginationQueryParams } from 'src/constants';
+import { PaginationQueryDto } from 'src/constants';
+import { CreateBookDto } from '../dto/create-book.dto';
+import { UpdateBookDto } from '../dto/update-book.dto';
 
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   @Get()
-  findAll(@Query('page') page: number = 1, @Query('limit') limit: number = 5) {
-    const queryParams: PaginationQueryParams = {
-      page,
-      limit,
-    };
-    return this.booksService.findAll(queryParams);
+  findAll(@Query() query: PaginationQueryDto) {
+    return this.booksService.findAll(query);
   }
 
   @Get(':id')
@@ -32,12 +29,12 @@ export class BooksController {
   }
 
   @Post()
-  create(@Body() body: booksModel.Book) {
+  create(@Body() body: CreateBookDto) {
     return this.booksService.create(body);
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() body: booksModel.Book) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateBookDto) {
     return this.booksService.update(id, body);
   }
 

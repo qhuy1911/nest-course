@@ -1,23 +1,21 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { MOCK_BOOKS } from '../mocks/books.mock';
 import { Book } from '../entities/book.entity';
-import { PaginationQueryParams, PaginationResponse } from 'src/constants';
+import { PaginationQueryDto, PaginationResponse } from 'src/constants';
 import { LoggerService } from 'src/logger/logger.service';
+import { CreateBookDto } from '../dto/create-book.dto';
+import { UpdateBookDto } from '../dto/update-book.dto';
 
 @Injectable()
 export class BooksService {
   constructor(private readonly logger: LoggerService) {}
 
-  findAll(queryParams: PaginationQueryParams): PaginationResponse<Book> {
+  findAll(queryParams: PaginationQueryDto): PaginationResponse<Book> {
     this.logger.log('Finding all books');
     return {
       loggerId: this.logger.getLoggerId(),
       ...queryParams,
-      data: MOCK_BOOKS.getAll,
+      data: MOCK_BOOKS,
     };
   }
 
@@ -29,22 +27,18 @@ export class BooksService {
   }
 
   findOne(id: number) {
-    return MOCK_BOOKS.getAll.find((book) => book.id === id);
+    return MOCK_BOOKS.find((book) => book.id === id);
   }
 
-  create(body: Book) {
-    const existingBook = MOCK_BOOKS.getAll.find((book) => book.id === body.id);
-    if (existingBook) {
-      throw new BadRequestException('Book with this id already exists');
-    }
-
+  create(body: CreateBookDto) {
     return {
+      id: MOCK_BOOKS.length + 1,
       ...body,
     };
   }
 
-  update(id: number, body: Book) {
-    const existingBook = MOCK_BOOKS.getAll.find((book) => book.id === id);
+  update(id: number, body: UpdateBookDto) {
+    const existingBook = MOCK_BOOKS.find((book) => book.id === id);
     if (!existingBook) {
       throw new NotFoundException('Book not found');
     }
@@ -56,7 +50,7 @@ export class BooksService {
   }
 
   remove(id: number) {
-    const existingBook = MOCK_BOOKS.getAll.find((book) => book.id === id);
+    const existingBook = MOCK_BOOKS.find((book) => book.id === id);
     if (!existingBook) {
       throw new NotFoundException('Book not found');
     }
