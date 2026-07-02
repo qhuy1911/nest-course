@@ -18,6 +18,11 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
+  @Get('config')
+  getConfig() {
+    return this.booksService.getConfig();
+  }
+
   @Get()
   findAll(@Query() query: PaginationQueryDto) {
     return this.booksService.findAll(query);

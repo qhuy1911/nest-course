@@ -4,10 +4,14 @@ import { AuthorWithBooks } from '../entities/authors.entity';
 import { BooksService } from 'src/books/services/books.service';
 import { PaginationResponse } from 'src/common/types/pagination-response';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class AuthorsService {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(
+    private readonly booksService: BooksService,
+    private readonly logger: LoggerService,
+  ) {}
 
   findAll(query: PaginationQueryDto): PaginationResponse<AuthorWithBooks> {
     const data = MOCK_AUTHORS.map(({ id, name, bookIds }) => ({
@@ -17,6 +21,7 @@ export class AuthorsService {
     }));
     return {
       ...query,
+      loggerId: this.logger.getLoggerId(),
       data,
     };
   }

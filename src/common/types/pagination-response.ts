@@ -1,5 +1,5 @@
 export type PaginationResponse<T> = {
-  loggerId?: number;
+  loggerId?: string;
   page: number;
   limit: number;
   data: T[];
