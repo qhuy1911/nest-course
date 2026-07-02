@@ -7,5 +7,6 @@ import { LoggerModule } from '../logger/logger.module';
   imports: [LoggerModule],
   controllers: [BooksController],
   providers: [BooksService],
+  exports: [BooksService],
 })
 export class BooksModule {}

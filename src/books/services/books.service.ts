@@ -21,8 +21,15 @@ export class BooksService {
     };
   }
 
-  findOne(id: string) {
-    return MOCK_BOOKS.getAll.find((book) => book.id === parseInt(id));
+  findMany(ids: number[]): Book[] {
+    return ids.flatMap((bookId) => {
+      const book = this.findOne(bookId);
+      return book ? [book] : [];
+    });
+  }
+
+  findOne(id: number) {
+    return MOCK_BOOKS.getAll.find((book) => book.id === id);
   }
 
   create(body: Book) {
@@ -36,10 +43,8 @@ export class BooksService {
     };
   }
 
-  update(id: string, body: Book) {
-    const existingBook = MOCK_BOOKS.getAll.find(
-      (book) => book.id === parseInt(id),
-    );
+  update(id: number, body: Book) {
+    const existingBook = MOCK_BOOKS.getAll.find((book) => book.id === id);
     if (!existingBook) {
       throw new NotFoundException('Book not found');
     }
@@ -50,10 +55,8 @@ export class BooksService {
     };
   }
 
-  remove(id: string) {
-    const existingBook = MOCK_BOOKS.getAll.find(
-      (book) => book.id === parseInt(id),
-    );
+  remove(id: number) {
+    const existingBook = MOCK_BOOKS.getAll.find((book) => book.id === id);
     if (!existingBook) {
       throw new NotFoundException('Book not found');
     }
