@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { AuthorsService } from '../services/authors.service';
 import { PaginationQueryParams } from 'src/constants';
 
@@ -13,5 +13,10 @@ export class AuthorsController {
       limit,
     };
     return this.authorsService.findAll(queryParams);
+  }
+
+  @Get(':id/books')
+  findBooksByAuthorId(@Param('id', ParseIntPipe) id: number) {
+    return this.authorsService.findBooksByAuthorId(id);
   }
 }

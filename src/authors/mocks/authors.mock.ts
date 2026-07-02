@@ -1,4 +1,6 @@
-export const MOCK_AUTHORS = [
+import { Author } from '../entities/authors.entity';
+
+export const MOCK_AUTHORS: Author[] = [
   {
     id: 1,
     name: 'Robert C. Martin',

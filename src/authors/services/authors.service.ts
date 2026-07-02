@@ -1,14 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { MOCK_AUTHORS } from '../mocks/authors.mock';
 import { PaginationQueryParams, PaginationResponse } from 'src/constants';
-import { Author } from '../entities/authors.entity';
+import { AuthorWithBooks } from '../entities/authors.entity';
 import { BooksService } from 'src/books/services/books.service';
 
 @Injectable()
 export class AuthorsService {
   constructor(private readonly booksService: BooksService) {}
 
-  findAll(queryParams: PaginationQueryParams): PaginationResponse<Author> {
+  findAll(
+    queryParams: PaginationQueryParams,
+  ): PaginationResponse<AuthorWithBooks> {
     const data = MOCK_AUTHORS.map(({ id, name, bookIds }) => ({
       id,
       name,
@@ -20,10 +22,8 @@ export class AuthorsService {
     };
   }
 
-  findBooksByAuthorId(authorId: string) {
-    const author = MOCK_AUTHORS.find(
-      (author) => author.id === parseInt(authorId),
-    );
+  findBooksByAuthorId(authorId: number) {
+    const author = MOCK_AUTHORS.find((author) => author.id === authorId);
 
     if (!author) {
       throw new NotFoundException('Author not found');
