@@ -1,16 +1,15 @@
-import { Injectable, Scope } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
-@Injectable({
-  scope: Scope.TRANSIENT,
-})
+@Injectable()
 export class ConsoleLoggerService {
   private readonly id = crypto.randomUUID();
+  private readonly logger = new Logger(ConsoleLoggerService.name);
 
   getLoggerId() {
     return this.id;
   }
 
   log(message: string) {
-    console.log(`[Console Logger]: ${message}`);
+    this.logger.log(`[Console Logger]: ${message}`);
   }
 }

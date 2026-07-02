@@ -12,7 +12,7 @@ import { APP_CONFIG, type AppConfig } from 'src/providers/app-config.provider';
 export class BooksService {
   constructor(
     private readonly logger: LoggerService,
-    @Inject(APP_CONFIG) private config: AppConfig,
+    @Inject(APP_CONFIG) private readonly config: AppConfig,
   ) {}
 
   findAll(queryParams: PaginationQueryDto): PaginationResponse<Book> {
@@ -66,7 +66,7 @@ export class BooksService {
     };
   }
 
-  getConfig() {
+  getConfig(): AppConfig {
     return this.config;
   }
 }
