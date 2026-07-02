@@ -21,6 +21,13 @@ export class BooksService {
     };
   }
 
+  findMany(ids: number[]): Book[] {
+    return ids.flatMap((bookId) => {
+      const book = this.findOne(bookId.toString());
+      return book ? [book] : [];
+    });
+  }
+
   findOne(id: string) {
     return MOCK_BOOKS.getAll.find((book) => book.id === parseInt(id));
   }
